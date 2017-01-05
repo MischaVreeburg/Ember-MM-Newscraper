@@ -26,7 +26,7 @@ Imports System.Text.RegularExpressions
 Imports EmberAPI
 Imports NLog
 
-Namespace IMDBg
+Namespace IMDB
 
     Public Class Scraper
 
@@ -41,8 +41,8 @@ Namespace IMDBg
 
 #Region "Methods"
 
-        Public Function GetIMDBPosters(ByVal imdbID As String) As List(Of MediaContainers.Image)
-            Dim alPoster As New List(Of MediaContainers.Image)
+        Public Function GetIMDBPosters(ByVal imdbID As String) As MediaContainers.SearchResultsContainer
+            Dim alContainer As New MediaContainers.SearchResultsContainer
             Dim aParentID As String = String.Empty
 
             Try
@@ -59,31 +59,28 @@ Namespace IMDBg
                 '      src = "http://ia.media-imdb.com/images/M/MV5BMTY1Mzk3MTg0M15BMl5BanBnXkFtZTcwOTQzODYyMQ@@._V1_SY317_CR3,0,214,317_.jpg"
                 Dim mcIMDB As MatchCollection = Regex.Matches(HTML, String.Concat("/media/[a-zA-Z0-9]{3,12}/tt", imdbID, "\?ref_=tt_ov_i"), RegexOptions.IgnoreCase)
                 If mcIMDB.Count > 0 Then
-                    'Debug.Print("GetIMDBPoster 1 - {0}", mcIMDB(0).Value)
                     'Dim sUrl1 As String = sHTTP.DownloadData(mcIMDB(0).Value)
                     mcIMDB = Regex.Matches(HTML, "http://ia.media-imdb.com/images/.{3,80}?.jpg")
                     If mcIMDB.Count > 0 Then
                         'just use the first one if more are found
-                        'Debug.Print("GetIMDBPoster 2 - {0}", mcIMDB(0).Value)
                         aStr = mcIMDB(0).Value.Substring(mcIMDB(0).Value.LastIndexOf("/") + 1, mcIMDB(0).Value.Length - (mcIMDB(0).Value.LastIndexOf("/") + 1))
-                        aPar = Split(aStr, ",")
+                        aPar = aStr.Split(","c)
                         'URLs can now look like this as well:
                         'http://ia.media-imdb.com/images/M/MV5BMTI5MTgxMzIzMl5BMl5BanBnXkFtZTcwNDA5MTYyMQ@@._V1_SY295_SX197_.jpg
                         If aPar.Length = 1 Then
-                            aPar2 = Split(aPar(0), ".")
+                            aPar2 = aPar(0).Split("."c)
                             aParentID = aPar2(0)
                             Dim mSYSX As Match = Regex.Match(aPar(0), "\._V\d+?_SY(\d+?)_SX(\d+?)_")
                             If mSYSX.Success Then
-                                alPoster.Add(New MediaContainers.Image With {.Description = Master.eSize.poster_names(5).description, .URL = mcIMDB(0).Value, .Width = mSYSX.Groups(2).Value, .Height = mSYSX.Groups(1).Value, .ParentID = aParentID})
+                                alContainer.MainPosters.Add(New MediaContainers.Image With {.URLOriginal = mcIMDB(0).Value, .Width = mSYSX.Groups(2).Value, .Height = mSYSX.Groups(1).Value})
                             Else
-                                logger.Error( "Unknown IMDB Poster URL")
-                                Debug.Assert(False)
+                                logger.Error("Unknown IMDB Poster URL")
                             End If
                         Else
-                            aPar2 = Split(aPar(0), ".")
+                            aPar2 = aPar(0).Split("."c)
                             aParentID = aPar2(0)
                             aPar(3) = aPar(3).Substring(0, aPar(3).LastIndexOf("_"))
-                            alPoster.Add(New MediaContainers.Image With {.Description = Master.eSize.poster_names(0).description, .URL = mcIMDB(0).Value, .Width = aPar(2), .Height = aPar(3), .ParentID = aParentID})
+                            alContainer.MainPosters.Add(New MediaContainers.Image With {.URLOriginal = mcIMDB(0).Value, .Width = aPar(2), .Height = aPar(3)})
                         End If
                     End If
                     'The URLs can contain SY or SX in them like this:
@@ -93,15 +90,14 @@ Namespace IMDBg
                     Dim aSP As String() = Regex.Split(mcIMDB(0).Value, "._V\d+?_S(?:X|Y)\d+?_CR\d+?,\d+?,\d+?,\d+?_")
                     If aSP.Length > 1 Then
                         Dim sUrl1 = aSP(0) + aSP(1)
-                        'Debug.Print("GetIMDBPoster 3 - {0}", sUrl1)
-                        alPoster.Add(New MediaContainers.Image With {.Description = Master.eSize.poster_names(5).description, .URL = sUrl1, .Width = "n/a", .Height = "n/a", .ParentID = aParentID})
+                        alContainer.MainPosters.Add(New MediaContainers.Image With {.URLOriginal = sUrl1, .Width = "n/a", .Height = "n/a", .Scraper = "IMDB"})
                     End If
                 End If
             Catch ex As Exception
-                logger.ErrorException(New StackFrame().GetMethod().Name,ex)
+                logger.Error(ex, New StackFrame().GetMethod().Name)
             End Try
 
-            Return alPoster
+            Return alContainer
         End Function
 
 #End Region 'Methods

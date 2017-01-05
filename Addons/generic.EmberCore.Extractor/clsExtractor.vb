@@ -25,7 +25,9 @@ Imports NLog
 Public Class ThumbGenerator
 
 #Region "Fields"
+
     Shared logger As Logger = NLog.LogManager.GetCurrentClassLogger()
+
 #End Region
 
     #Region "Methods"
@@ -37,7 +39,7 @@ Public Class ThumbGenerator
     ''' <param name="ThumbCount">How many thumbs to extract</param>
     ''' <param name="isEdit"></param>
     ''' <returns>Fanart path if an extrathumb was set as fanart.</returns>
-    Public Shared Function CreateRandomThumbs(ByVal mMovie As Structures.DBMovie, ByVal ThumbCount As Integer, ByVal isEdit As Boolean) As String
+    Public Shared Function CreateRandomThumbs(ByVal mMovie As Database.DBElement, ByVal ThumbCount As Integer, ByVal isEdit As Boolean) As String
         Dim tThumb As New GeneratorThread
 
         tThumb.Movie = mMovie
@@ -58,7 +60,7 @@ Public Class ThumbGenerator
         #Region "Fields"
 
         Public _isedit As Boolean
-        Public _movie As Structures.DBMovie
+        Public _movie As Database.DBElement
         Public _setfa As String
         Public _thumbcount As Integer
 
@@ -75,8 +77,8 @@ Public Class ThumbGenerator
             End Set
         End Property
 
-        Public WriteOnly Property Movie() As Structures.DBMovie
-            Set(ByVal value As Structures.DBMovie)
+        Public WriteOnly Property Movie() As Database.DBElement
+            Set(ByVal value As Database.DBElement)
                 _movie = value
             End Set
         End Property
@@ -112,7 +114,7 @@ Public Class ThumbGenerator
                 '    End If
 
             Catch ex As Exception
-                logger.ErrorException(New StackFrame().GetMethod().Name,ex)
+                logger.Error(ex, New StackFrame().GetMethod().Name)
             End Try
         End Sub
 
@@ -137,7 +139,7 @@ Public Class ThumbGenerator
             Try
                 Dim pExt As String = Path.GetExtension(_movie.Filename).ToLower
                 Dim eMovieFile As String = String.Empty
-                If Not pExt = ".rar" AndAlso Not pExt = ".iso" AndAlso Not pExt = ".img" AndAlso _
+                If Not pExt = ".rar" AndAlso Not pExt = ".iso" AndAlso Not pExt = ".img" AndAlso
                 Not pExt = ".bin" AndAlso Not pExt = ".cue" Then
 
                     Dim intSeconds As Integer = 0
@@ -150,13 +152,13 @@ Public Class ThumbGenerator
                         eMovieFile = _movie.Filename
                     Else 'TODO: chek VIDEO_TS parent
                         If FileUtils.Common.isVideoTS(_movie.Filename) Then
-                            tPath = Path.Combine(Directory.GetParent(Directory.GetParent(_movie.Filename).FullName).FullName, "extrathumbs")
+                            tPath = Path.Combine(FileUtils.Common.GetMainPath(_movie.Filename).FullName, "extrathumbs")
                             eMovieFile = FileUtils.Common.GetLongestFromRip(_movie.Filename)
                         ElseIf FileUtils.Common.isBDRip(_movie.Filename) Then
-                            tPath = Path.Combine(Directory.GetParent(Directory.GetParent(Directory.GetParent(_movie.Filename).FullName).FullName).FullName, "extrathumbs")
+                            tPath = Path.Combine(FileUtils.Common.GetMainPath(_movie.Filename).FullName, "extrathumbs")
                             eMovieFile = FileUtils.Common.GetLongestFromRip(_movie.Filename)
                         Else
-                            tPath = Path.Combine(Directory.GetParent(_movie.Filename).FullName, "extrathumbs")
+                            tPath = Path.Combine(FileUtils.Common.GetMainPath(_movie.Filename).FullName, "extrathumbs")
                             If FileUtils.Common.isVideoTS(_movie.Filename) OrElse FileUtils.Common.isBDRip(_movie.Filename) Then
                                 eMovieFile = FileUtils.Common.GetLongestFromRip(_movie.Filename)
                             Else
@@ -244,18 +246,17 @@ Public Class ThumbGenerator
                     Else
                         'always set to something if extrathumbs are created so we know during scrapers
                         _setfa = "TRUE"
-                        Using exFanart As New Images
-                            If String.IsNullOrEmpty(_movie.FanartPath) Then
-                                exFanart.FromFile(Path.Combine(tPath, "thumb1.jpg"))
-                                _setfa = exFanart.SaveAsMovieFanart(_movie)
-                            End If
-                        End Using
+                        Dim exFanart As New Images
+                        If String.IsNullOrEmpty(_movie.ImagesContainer.Fanart.LocalFilePath) Then
+                            exFanart.LoadFromFile(Path.Combine(tPath, "thumb1.jpg"))
+                            _setfa = exFanart.Save_Movie(_movie, Enums.ModifierType.MainFanart)
+                        End If
                     End If
 
                 End If
 
             Catch ex As Exception
-                logger.ErrorException(New StackFrame().GetMethod().Name,ex)
+                logger.Error(ex, New StackFrame().GetMethod().Name)
             End Try
         End Sub
 
