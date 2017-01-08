@@ -7,6 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:Ember_Media_Manager_WPF"
     xmlns:myRes="clr-namespace:Ember_Media_Manager_WPF.My.Resources"
+    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
     Height="984"
     MinHeight="700"
     Width="1370"
@@ -334,12 +335,14 @@
             x:Key="mnuGenres">
             <MenuItem
                 x:Name="mnuGenresTitleSelect"
-                Header="&gt;&gt; Select Genre &lt;&lt;" />
+                Header="&gt;&gt; Select Genre &lt;&lt;"
+                IsEnabled="False" />
             <ComboBox x:Name="mnuGenresGenre" />
             <Separator x:Name="mnuGenresSep1" />
             <MenuItem
                 x:Name="mnuGenresTitleNew"
-                Header="&gt;&gt; New Genre &lt;&lt;" />
+                Header="&gt;&gt; New Genre &lt;&lt;"
+                IsEnabled="False" />
             <TextBox x:Name="mnuGenresNew" />
             <Separator x:Name="mnuGenresSep2" />
             <MenuItem
@@ -358,12 +361,14 @@
             x:Key="mnuTags">
             <MenuItem
                 x:Name="mnuTagsTitleSelect"
-                Header="&gt;&gt; Select Tag &lt;&lt;" />
+                Header="&gt;&gt; Select Tag &lt;&lt;"
+                IsEnabled="false" />
             <ComboBox x:Name="mnuTagsTag" />
             <Separator x:Name="mnuTagsSep1" />
             <MenuItem
                 x:Name="mnuTagsTitleNew"
-                Header="&gt;&gt; New Tag &lt;&lt;" />
+                Header="&gt;&gt; New Tag &lt;&lt;"
+                IsEnabled="false" />
             <TextBox x:Name="mnuTagsNew" />
             <Separator x:Name="mnuTagsSep2" />
             <MenuItem
@@ -390,11 +395,17 @@
                 Tag="videosource" />
         </Menu>
 
-        <!-- ContextMenus -->
-
         <Menu
             x:Name="mnuLanguages"
-            x:Key="mnuLanguages" />
+            x:Key="mnuLanguages">
+            <MenuItem
+                x:Name="mnuLanguagesTitleSelect"
+                Header="&gt;&gt; Select Language &lt;&lt;"
+                IsEnabled="False" />
+            <ComboBox x:Name="mnuLanguagesLanguage" />
+            <Separator x:Name="mnuLanguagesSep1" />
+            <MenuItem x:Name="mnuLanguagesSet" />
+        </Menu>
 
         <Menu
             x:Name="mnuScrapeOption"
@@ -491,12 +502,15 @@
                 Tag="actors" />
         </Menu>
 
+        <!-- ContextMenus -->
+        <!-- cmnuMovie -->
         <Menu
             x:Name="cmnuMovie"
             x:Key="cmnuMovie">
             <MenuItem
                 x:Name="cmnuMovieTitle"
-                Header="Title">
+                Header="Title"
+                IsEnabled="False">
                 <MenuItem.Icon>
                     <Image
                         Height="16"
@@ -921,7 +935,1565 @@
             </MenuItem>
         </Menu>
 
+        <!-- cmnuMovieSet -->
+        <Menu
+            x:Name="cmnuMovieSet"
+            x:Key="cmnuMovieSet">
+            <MenuItem
+                x:Name="cmnuMovieSetTitle"
+                Header="Title"
+                IsEnabled="False">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuMovieSetTitleImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator x:Name="cmnuMovieSetDatabaseSeparator" />
+            <MenuItem
+                x:Name="cmnuMovieSetReload"
+                Header="Reload"
+                InputGestureText="F5">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuMovieSetReloadImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuMovieSetMark"
+                Header="Mark"
+                InputGestureText="Ctrl+M">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuMovieSetMarkImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuMovieSetUnmark"
+                Header="Unmark"
+                InputGestureText="Ctrl+Alt+M">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuMovieSetUnmarkImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuMovieSetLock"
+                Header="Lock"
+                InputGestureText="Ctrl+L">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuMovieSetLockImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuMovieSetUnlock"
+                Header="Unlock"
+                InputGestureText="Ctrl+Alt+L">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuMovieSetUnlockImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator x:Name="cmnuMovieSetNewSeparator" />
+            <MenuItem
+                x:Name="cmnuMovieSetNew"
+                Header="Add New MovieSet"
+                InputGestureText="Ctrl+N">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.menuAdd},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator x:Name="cmnuMovieSetEditSeparator" />
+            <MenuItem
+                x:Name="cmnuMovieSetEdit"
+                Header="Edit MovieSet"
+                InputGestureText="Ctrl+E">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuMovieSetEditImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuMovieSetEditSortMethod"
+                Header="Edit Movie Sorting" />
+            <Separator x:Name="cmnuMovieSetScrapeSeparator" />
+            <MenuItem
+                x:Name="cmnuMovieSetScrape"
+                Header="(Re)Scrape MovieSet"
+                InputGestureText="Ctrl+I">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuMovieSetScrapeImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuMovieSetScrapeSelected"
+                Header="(Re)Scrape Selected MovieSets"
+                ItemsSource="{Binding
+                    Source={StaticResource mnuScrapeType}}"
+                Tag="movieset">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuMovieSetScrapeSelectedImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuMovieSetScrapeSingleDataField"
+                Header="(Re)Scrape Single Data Field"
+                ItemsSource="{Binding
+                    Source={StaticResource mnuScrapeOption}}"
+                Tag="movieset" />
+            <MenuItem
+                x:Name="cmnuMovieSetLanguage"
+                Header="Change Language"
+                ItemsSource="{Binding
+                    Source={StaticResource mnuLanguages}}"
+                Tag="movieset" />
+            <Separator x:Name="cmnuMovieSetSep3" />
+            <MenuItem
+                x:Name="cmnuMovieSetBrowseTMDB"
+                Header="Open TMDB-Page">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.tmdb},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuMovieSetRemove"
+                Header="Remove"
+                InputGestureText="Del">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuMovieSetRemoveImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+        </Menu>
+
+        <!-- cmnuShow -->
+        <Menu
+            x:Name="cmnuShow"
+            x:Key="cmnuShow">
+            <MenuItem
+                x:Name="cmnuShowTitle"
+                Header="Title"
+                IsEnabled="False">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowTitleImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator x:Name="cmnuShowDatabaseSeparator" />
+            <MenuItem
+                x:Name="cmnuShowReload"
+                Header="Reload"
+                InputGestureText="F5">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowReloadImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuShowReloadFull"
+                Header="Reload Full"
+                InputGestureText="Ctrl+Del">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowReloadFullImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuShowMark"
+                Header="Mark"
+                InputGestureText="Ctrl+M">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowMarkImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuShowUnmark"
+                Header="Unmark"
+                InputGestureText="Ctrl+Alt+M">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowUnmarkImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuShowWatched"
+                Header="Mark as Watched"
+                InputGestureText="Ctrl+W">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.haswatched},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuShowUnwatched"
+                Header="Mark as Unwatched"
+                InputGestureText="Ctrl+Alt+W">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.haswatched},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuShowLock"
+                Header="Lock"
+                InputGestureText="Ctrl+L">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowLockImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuShowUnlock"
+                Header="Unlock"
+                InputGestureText="Ctrl+Alt+L">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowUnlockImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator x:Name="cmnuShowEditSeparator" />
+            <MenuItem
+                x:Name="cmnuShowEdit"
+                Header="Edit Show"
+                InputGestureText="Ctrl+E">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowEditImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuShowEditGenres"
+                Header="Edit Genres"
+                ItemsSource="{Binding
+                    Source={StaticResource mnuGenres}}">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.heart},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuShowEditTags"
+                Header="Edit Tags"
+                ItemsSource="{Binding
+                    Source={StaticResource mnuTags}}">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.MovieSet},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator x:Name="cmnuShowScrapeSeparator" />
+            <MenuItem
+                x:Name="cmnuShowScrape"
+                Header="(Re)Scrape Show"
+                InputGestureText="Ctrl+I">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowScrapeImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuShowScrapeSelected"
+                Header="(Re)Scrape Selected Shows"
+                ItemsSource="{Binding
+                    Source={StaticResource mnuScrapeType}}"
+                Tag="tvshow">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowScrapeSelectedImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuShowScrapeSingleDataField"
+                Header="(Re)Scrape Single Data Field"
+                ItemsSource="{Binding
+                    Source={StaticResource mnuScrapeOption}}"
+                Tag="tvshow" />
+            <MenuItem
+                x:Name="cmnuShowGetMissingEpisodes"
+                Header="Get Missing Episodes"
+                InputGestureText="Ctrl+R"
+                Tag="tvshow" />
+            <MenuItem
+                x:Name="cmnuShowChange"
+                Header="Change Show"
+                InputGestureText="Ctrl+C">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowChangeImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuShowLanguage"
+                Header="Change Language"
+                ItemsSource="{Binding
+                    Source={StaticResource mnuLanguages}}"
+                Tag="tvshow" />
+            <Separator x:Name="cmnuShowSep3" />
+            <MenuItem
+                x:Name="cmnuShowBrowseIMDB"
+                Header="Open IMDB-Page">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.imdb},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuShowBrowseTMDB"
+                Header="Open TMDB-Page">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.tmdb},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuShowBrowseTVDB"
+                Header="Open TVDB-Page">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.tvdb},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuShowOpenFolder"
+                Header="Open Containing Folder"
+                InputGestureText="Ctrl+O">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowOpenFolderImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator x:Name="cmnuShowSep4" />
+            <MenuItem
+                x:Name="cmnuShowClearCache"
+                Header="Clear Cache">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowClearCacheImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+                <MenuItem
+                    x:Name="cmnuShowClearCacheDataAndImages"
+                    Header="Data and Images" />
+                <Separator x:Name="cmnuShowClearCacheSeparator" />
+                <MenuItem
+                    x:Name="cmnuShowClearCacheDataOnly"
+                    Header="Data Only" />
+                <MenuItem
+                    x:Name="cmnuShowClearCacheImagesOnly"
+                    Header="Images Only" />
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuShowRemove"
+                Header="Remove">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowRemoveImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+                <MenuItem
+                    x:Name="cmnuShowRemoveFromDB"
+                    Header="Remove from Database"
+                    InputGestureText="Del">
+                    <MenuItem.Icon>
+                        <Image
+                            Height="16"
+                            Width="16"
+                            Margin="0,0,3,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Source="{Binding
+                                Source={x:Static myRes:Resources.cmnuShowRemoveFromDBImage},
+                                Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    x:Name="cmnuShowRemoveFromDisk"
+                    Header="Delete TV Show"
+                    InputGestureText="Ctrl+Del">
+                    <MenuItem.Icon>
+                        <Image
+                            Height="16"
+                            Width="16"
+                            Margin="0,0,3,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Source="{Binding
+                                Source={x:Static myRes:Resources.cmnuShowRemoveFromDiskImage},
+                                Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <!-- cmnuSeason -->
+        <Menu
+            x:Name="cmnuSeason"
+            x:Key="cmnuSeason">
+            <MenuItem
+                x:Name="cmnuSeasonTitle"
+                Header="Title"
+                IsEnabled="False">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowTitleImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator x:Name="cmnuSeasonDatabaseSeparator" />
+            <MenuItem
+                x:Name="cmnuSeasonReload"
+                Header="Reload"
+                InputGestureText="F5">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowReloadImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuSeasonReloadFull"
+                Header="Reload Full"
+                InputGestureText="Ctrl+Del">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowReloadFullImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuSeasonMark"
+                Header="Mark"
+                InputGestureText="Ctrl+M">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowMarkImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuSeasonUnmark"
+                Header="Unmark"
+                InputGestureText="Ctrl+Alt+M">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowUnmarkImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuSeasonWatched"
+                Header="Mark as Watched"
+                InputGestureText="Ctrl+W">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.haswatched},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuSeasonUnwatched"
+                Header="Mark as Unwatched"
+                InputGestureText="Ctrl+Alt+W">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.haswatched},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuSeasonLock"
+                Header="Lock"
+                InputGestureText="Ctrl+L">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowLockImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuSeasonUnlock"
+                Header="Unlock"
+                InputGestureText="Ctrl+Alt+L">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowUnlockImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator x:Name="cmnuSeasonEditSeparator" />
+            <MenuItem
+                x:Name="cmnuSeasonEdit"
+                Header="Edit Season"
+                InputGestureText="Ctrl+E">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowEditImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator x:Name="cmnuSeasonScrapeSeparator" />
+            <MenuItem
+                x:Name="cmnuSeasonScrape"
+                Header="(Re)Scrape Season"
+                InputGestureText="Ctrl+I">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowScrapeImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuSeasonScrapeSelected"
+                Header="(Re)Scrape Selected Seasons"
+                ItemsSource="{Binding
+                    Source={StaticResource mnuScrapeType}}"
+                Tag="tvseason">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowScrapeSelectedImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuShowSeasonSingleDataField"
+                Header="(Re)Scrape Single Data Field"
+                ItemsSource="{Binding
+                    Source={StaticResource mnuScrapeOption}}"
+                Tag="tvseason" />
+            <Separator x:Name="cmnuSeasonSep3" />
+            <MenuItem
+                x:Name="cmnuSeasonBrowseIMDB"
+                Header="Open IMDB-Page">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.imdb},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuSeasonBrowseTMDB"
+                Header="Open TMDB-Page">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.tmdb},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuSeasonBrowseTVDB"
+                Header="Open TVDB-Page">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.tvdb},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuSeasonOpenFolder"
+                Header="Open Containing Folder"
+                InputGestureText="Ctrl+O">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowOpenFolderImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator x:Name="cmnuSeasonSep4" />
+            <MenuItem
+                x:Name="cmnuSeasonRemove"
+                Header="Remove">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowRemoveImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+                <MenuItem
+                    x:Name="cmnuSeasonRemoveFromDB"
+                    Header="Remove from Database"
+                    InputGestureText="Del">
+                    <MenuItem.Icon>
+                        <Image
+                            Height="16"
+                            Width="16"
+                            Margin="0,0,3,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Source="{Binding
+                                Source={x:Static myRes:Resources.cmnuShowRemoveFromDBImage},
+                                Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    x:Name="cmnuSeasonRemoveFromDisk"
+                    Header="Delete TV Season"
+                    InputGestureText="Ctrl+Del">
+                    <MenuItem.Icon>
+                        <Image
+                            Height="16"
+                            Width="16"
+                            Margin="0,0,3,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Source="{Binding
+                                Source={x:Static myRes:Resources.cmnuShowRemoveFromDiskImage},
+                                Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+
+        </Menu>
+
+        <!-- cmnuMovieSet -->
+        <Menu
+            x:Name="cmnuEpisode"
+            x:Key="cmnuEpisode">
+            <MenuItem
+                x:Name="cmnuEpisodeTitle"
+                Header="Title"
+                IsEnabled="False">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowTitleImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator x:Name="cmnuEpisodeDatabaseSeparator" />
+            <MenuItem
+                x:Name="cmnuEpisodeReload"
+                Header="Reload"
+                InputGestureText="F5">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowReloadImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuEpisodeReloadFull"
+                Header="Reload Full"
+                InputGestureText="Ctrl+Del">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowReloadFullImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuEpisodeMark"
+                Header="Mark"
+                InputGestureText="Ctrl+M">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowMarkImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuEpisodeUnmark"
+                Header="Unmark"
+                InputGestureText="Ctrl+Alt+M">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowUnmarkImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuEpisodeWatched"
+                Header="Mark as Watched"
+                InputGestureText="Ctrl+W">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.haswatched},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuEpisodeUnwatched"
+                Header="Mark as Unwatched"
+                InputGestureText="Ctrl+Alt+W">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.haswatched},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuEpisodeLock"
+                Header="Lock"
+                InputGestureText="Ctrl+L">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowLockImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuEpisodeUnlock"
+                Header="Unlock"
+                InputGestureText="Ctrl+Alt+L">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowUnlockImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator x:Name="cmnuEpisodeEditSeparator" />
+            <MenuItem
+                x:Name="cmnuEpisodeEdit"
+                Header="Edit Episode"
+                InputGestureText="Ctrl+E">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowEditImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuEpisodeEditDataField"
+                Header="Edit Data Field"
+                ItemsSource="{Binding
+                    Source={StaticResource mnuDataField}}"
+                Tag="tvepisode" />
+            <Separator x:Name="cmnuEpisodeScrapeSeparator" />
+            <MenuItem
+                x:Name="cmnuEpisodeScrape"
+                Header="(Re)Scrape Episode"
+                InputGestureText="Ctrl+I">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowScrapeImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuEpisodeScrapeSelected"
+                Header="(Re)Scrape Selected Episodes"
+                ItemsSource="{Binding
+                    Source={StaticResource mnuScrapeType}}"
+                Tag="tvseason">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowScrapeSelectedImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuEpisodeSingleDataField"
+                Header="(Re)Scrape Single Data Field"
+                ItemsSource="{Binding
+                    Source={StaticResource mnuScrapeOption}}"
+                Tag="tvseason" />
+            <MenuItem
+                x:Name="cmnuEpisodeChange"
+                Header="Change Episode"
+                InputGestureText="Ctrl+C">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuEpisodeChange_Image},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator x:Name="cmnuEpisodeSep3" />
+            <MenuItem
+                x:Name="cmnuEpisodeBrowseIMDB"
+                Header="Open IMDB-Page">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.imdb},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuEpisodeBrowseTMDB"
+                Header="Open TMDB-Page">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.tmdb},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuEpisodeBrowseTVDB"
+                Header="Open TVDB-Page">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.tvdb},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuEpisodeOpenFolder"
+                Header="Open Containing Folder"
+                InputGestureText="Ctrl+O">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowOpenFolderImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator x:Name="cmnuEpisodeSep4" />
+            <MenuItem
+                x:Name="cmnuEpisodeRemove"
+                Header="Remove">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuShowRemoveImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+                <MenuItem
+                    x:Name="cmnuEpisodeRemoveFromDB"
+                    Header="Remove from Database"
+                    InputGestureText="Del">
+                    <MenuItem.Icon>
+                        <Image
+                            Height="16"
+                            Width="16"
+                            Margin="0,0,3,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Source="{Binding
+                                Source={x:Static myRes:Resources.cmnuShowRemoveFromDBImage},
+                                Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    x:Name="cmnuEpisodeRemoveFromDisk"
+                    Header="Delete TV Episode"
+                    InputGestureText="Ctrl+Del">
+                    <MenuItem.Icon>
+                        <Image
+                            Height="16"
+                            Width="16"
+                            Margin="0,0,3,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Source="{Binding
+                                Source={x:Static myRes:Resources.cmnuShowRemoveFromDiskImage},
+                                Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <!-- Tray menu -->
+        <Menu
+            x:Name="cmnuTray"
+            x:Key="cmnuTray">
+            <MenuItem
+                x:Name="cmnuTrayTitle"
+                Header="Ember Media Manager"
+                IsEnabled="false">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuTrayTitleImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator x:Name="ToolStripSeparator21" />
+            <MenuItem
+                x:Name="cmnuTrayUpdate"
+                Header="Update Media">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuTrayUpdateImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+                <MenuItem
+                    x:Name="cmnuTrayUpdateMovies"
+                    Header="Movies" />
+                <MenuItem
+                    x:Name="cmnuTrayUpdateShows"
+                    Header="TV Shows" />
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuTrayScrapeMovies"
+                Header="Scrape Movies"
+                ItemsSource="{Binding
+                    Source={StaticResource mnuScrapeSubmenu}}"
+                Tag="movie" />
+            <MenuItem
+                x:Name="cmnuTrayScrapeMovieSets"
+                Header="Scrape MovieSets"
+                ItemsSource="{Binding
+                    Source={StaticResource mnuScrapeSubmenu}}"
+                Tag="movieset">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuTrayScrapeMovieSetsImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem
+                x:Name="cmnuTrayScrapeTVShows"
+                Header="Scrape TV Shows"
+                ItemsSource="{Binding
+                    Source={StaticResource mnuScrapeSubmenu}}"
+                Tag="tvshow">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuTrayScrapeTVShowsImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator x:Name="ToolStripSeparator23" />
+            <MenuItem
+                x:Name="cmnuTrayTools"
+                Header="Tools">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuTrayToolsImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+                <MenuItem
+                    x:Name="cmnuTrayToolsCleanFiles"
+                    Header="Clean Files">
+                    <MenuItem.Icon>
+                        <Image
+                            Height="16"
+                            Width="16"
+                            Margin="0,0,3,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Source="{Binding
+                                Source={x:Static myRes:Resources.cmnuTrayToolsCleanFilesImage},
+                                Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    x:Name="cmnuTrayToolsSortFiles"
+                    Header="Sort Files into Folders">
+                    <MenuItem.Icon>
+                        <Image
+                            Height="16"
+                            Width="16"
+                            Margin="0,0,3,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Source="{Binding
+                                Source={x:Static myRes:Resources.cmnuTrayToolsSortFilesImage},
+                                Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    x:Name="cmnuTrayToolsBackdrops"
+                    Header="Copy Existing Fanart to Backdrops Folder">
+                    <MenuItem.Icon>
+                        <Image
+                            Height="16"
+                            Width="16"
+                            Margin="0,0,3,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Source="{Binding
+                                Source={x:Static myRes:Resources.cmnuTrayToolsBackdropImage},
+                                Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator x:Name="ToolStripSeparator24" />
+                <MenuItem
+                    x:Name="cmnuTrayToolsOfflineHolder"
+                    Header="Offline Media Manager">
+                    <MenuItem.Icon>
+                        <Image
+                            Height="16"
+                            Width="16"
+                            Margin="0,0,3,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Source="{Binding
+                                Source={x:Static myRes:Resources.cmnuTrayToolsOfflineHolderImage},
+                                Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator x:Name="ToolStripSeparator25" />
+                <MenuItem
+                    x:Name="cmnuTrayToolsClearCache"
+                    Header="Clear All Caches">
+                    <MenuItem.Icon>
+                        <Image
+                            Height="16"
+                            Width="16"
+                            Margin="0,0,3,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Source="{Binding
+                                Source={x:Static myRes:Resources.cmnuTrayToolsClearCacheImage},
+                                Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    x:Name="cmnuTrayToolsCleanDB"
+                    Header="Clean Database">
+                    <MenuItem.Icon>
+                        <Image
+                            Height="16"
+                            Width="16"
+                            Margin="0,0,3,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Source="{Binding
+                                Source={x:Static myRes:Resources.cmnuTrayToolsCleanDBImage},
+                                Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator x:Name="ToolStripSeparator41" />
+                <MenuItem
+                    x:Name="cmnuTrayToolsReloadMovies"
+                    Header="Reload All Movies">
+                    <MenuItem.Icon>
+                        <Image
+                            Height="16"
+                            Width="16"
+                            Margin="0,0,3,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Source="{Binding
+                                Source={x:Static myRes:Resources.cmnuTrayToolsReloadMoviesImage},
+                                Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    x:Name="cmnuTrayToolsReloadMovieSets"
+                    Header="Reload All MovieSets">
+                    <MenuItem.Icon>
+                        <Image
+                            Height="16"
+                            Width="16"
+                            Margin="0,0,3,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Source="{Binding
+                                Source={x:Static myRes:Resources.cmnuTrayToolsReloadMovieSetsImage},
+                                Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem
+                    x:Name="cmnuTrayToolsReloadTVShows"
+                    Header="Reload All TV Shows">
+                    <MenuItem.Icon>
+                        <Image
+                            Height="16"
+                            Width="16"
+                            Margin="0,0,3,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Source="{Binding
+                                Source={x:Static myRes:Resources.cmnuTrayToolsReloadTVShowsImage},
+                                Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator x:Name="ToolStripSeparator26" />
+            </MenuItem>
+            <Separator x:Name="ToolStripSeparator22" />
+            <MenuItem
+                x:Name="cmnuTraySettings"
+                Header="Settings...">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuTraySettingsImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator x:Name="ToolStripSeparator13" />
+            <MenuItem
+                x:Name="cmnuTrayExit"
+                Header="Exit">
+                <MenuItem.Icon>
+                    <Image
+                        Height="16"
+                        Width="16"
+                        Margin="0,0,3,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Source="{Binding
+                            Source={x:Static myRes:Resources.cmnuTrayExitImage},
+                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                </MenuItem.Icon>
+            </MenuItem>
+        </Menu>
+
     </Window.Resources>
+
     <Window.CommandBindings>
         <CommandBinding
             Command="CleanFiles"
@@ -1904,38 +3476,35 @@
                             </Border>
 
                             <DockPanel>
-                                <StackPanel
+                                <DockPanel
                                     x:Name="pnlSearchMovies"
                                     DockPanel.Dock="Top"
                                     Height="35"
-                                    HorizontalAlignment="Stretch"
-                                    Orientation="Horizontal">
-                                    <TextBox />
-                                    <ComboBox
-                                        x:Name="cbSearchMovies"
-                                        Height="21"
-                                        Width="100"
-                                        Margin="3"
-                                        HorizontalAlignment="Right"
-                                        HorizontalContentAlignment="Right" />
+                                    HorizontalAlignment="Stretch">
                                     <Image
                                         x:Name="picSearchMovies"
+                                        DockPanel.Dock="Right"
                                         Height="16"
                                         Width="16"
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
                                         Source="{Binding
-                                            Source={x:Static myRes:Resources.picSearchMoviesImage},
-                                            Converter={StaticResource MyBitmapToImageSourceConverter}}" />
-                                </StackPanel>
-                                <DataGrid
-                                    x:Name="dvgMovies"
-                                    HorizontalAlignment="Stretch"
-                                    VerticalAlignment="Stretch"
-                                    CanUserReorderColumns="False"
-                                    CanUserResizeRows="False"
-                                    HorizontalScrollBarVisibility="Auto"
-                                    VerticalScrollBarVisibility="Auto" />
+                                            Converter={StaticResource MyBitmapToImageSourceConverter},
+                                            Source={x:Static myRes:Resources.picSearchMoviesImage}}" />
+                                    <ComboBox
+                                        x:Name="cbSearchMovies"
+                                        DockPanel.Dock="Right"
+                                        Height="21"
+                                        Width="100"
+                                        Margin="3"
+                                        HorizontalAlignment="Right"
+                                        HorizontalContentAlignment="Right" />
+                                    <xctk:WatermarkTextBox
+                                        x:Name="txtSearchMovies"
+                                        Height="21"
+                                        Margin="3"
+                                        HorizontalAlignment="Stretch" />
+                                </DockPanel>
                                 <Expander
                                     x:Name="pnlFilter_Movies"
                                     DockPanel.Dock="Bottom"
@@ -2072,8 +3641,8 @@
                                                             HorizontalAlignment="Center"
                                                             VerticalAlignment="Center"
                                                             Source="{Binding
-                                                                Source={x:Static myRes:Resources.btnClearFilters_Movies_Image},
-                                                                Converter={StaticResource MyBitmapToImageSourceConverter}}" />
+                                                                Converter={StaticResource MyBitmapToImageSourceConverter},
+                                                                Source={x:Static myRes:Resources.btnClearFilters_Movies_Image}}" />
                                                         <Label
                                                             Height="19"
                                                             Width="52"
@@ -2112,16 +3681,14 @@
                                                                         x:Name="rbFilterAnd_Movies"
                                                                         Height="17"
                                                                         Width="46"
-                                                                        Margin="3">
-                                                                        And
-                                                                    </RadioButton>
+                                                                        Margin="3"
+                                                                        Content="And" />
                                                                     <RadioButton
                                                                         x:Name="rbFilterOr_Movies"
                                                                         Height="17"
                                                                         Width="46"
-                                                                        Margin="3">
-                                                                        Or
-                                                                    </RadioButton>
+                                                                        Margin="3"
+                                                                        Content="Or" />
                                                                 </StackPanel>
                                                             </StackPanel>
                                                         </GroupBox>
@@ -2312,6 +3879,14 @@
                                         </StackPanel>
                                     </StackPanel>
                                 </Expander>
+                                <DataGrid
+                                    x:Name="dvgMovies"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    CanUserReorderColumns="False"
+                                    CanUserResizeRows="False"
+                                    HorizontalScrollBarVisibility="Auto"
+                                    VerticalScrollBarVisibility="Auto" />
                             </DockPanel>
                         </Grid>
                     </TabItem>
@@ -2428,22 +4003,14 @@
                                 </Canvas>
                             </Border>
                             <DockPanel>
-                                <StackPanel
+                                <DockPanel
                                     x:Name="pnlSearchMovieSets"
                                     DockPanel.Dock="Top"
                                     Height="35"
-                                    HorizontalAlignment="Stretch"
-                                    Orientation="Horizontal">
-                                    <TextBox />
-                                    <ComboBox
-                                        x:Name="cbSearchMovieSets"
-                                        Height="21"
-                                        Width="100"
-                                        Margin="3"
-                                        HorizontalAlignment="Right"
-                                        HorizontalContentAlignment="Right" />
+                                    HorizontalAlignment="Stretch">
                                     <Image
                                         x:Name="picSearchMovieSets"
+                                        DockPanel.Dock="Right"
                                         Height="16"
                                         Width="16"
                                         HorizontalAlignment="Right"
@@ -2451,15 +4018,20 @@
                                         Source="{Binding
                                             Converter={StaticResource MyBitmapToImageSourceConverter},
                                             Source={x:Static myRes:Resources.picSearchMoviesImage}}" />
-                                </StackPanel>
-                                <DataGrid
-                                    x:Name="dvgMovieSets"
-                                    HorizontalAlignment="Stretch"
-                                    VerticalAlignment="Stretch"
-                                    CanUserReorderColumns="False"
-                                    CanUserResizeRows="False"
-                                    HorizontalScrollBarVisibility="Auto"
-                                    VerticalScrollBarVisibility="Auto" />
+                                    <ComboBox
+                                        x:Name="cbSearchMovieSets"
+                                        DockPanel.Dock="Right"
+                                        Height="21"
+                                        Width="100"
+                                        Margin="3"
+                                        HorizontalAlignment="Right"
+                                        HorizontalContentAlignment="Right" />
+                                    <xctk:WatermarkTextBox
+                                        x:Name="txtSearchMovieSets"
+                                        Height="21"
+                                        Margin="3"
+                                        HorizontalAlignment="Stretch" />
+                                </DockPanel>
                                 <Expander
                                     x:Name="pnlFilter_MovieSets"
                                     DockPanel.Dock="Bottom"
@@ -2850,6 +4422,14 @@
                                         </StackPanel>
                                     </StackPanel>
                                 </Expander>
+                                <DataGrid
+                                    x:Name="dvgMovieSets"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    CanUserReorderColumns="False"
+                                    CanUserResizeRows="False"
+                                    HorizontalScrollBarVisibility="Auto"
+                                    VerticalScrollBarVisibility="Auto" />
                             </DockPanel>
                         </Grid>
                     </TabItem>
@@ -3183,22 +4763,14 @@
                                 </Canvas>
                             </Border>
                             <DockPanel>
-                                <StackPanel
+                                <DockPanel
                                     x:Name="pnlSearchTvShows"
                                     DockPanel.Dock="Top"
                                     Height="35"
-                                    HorizontalAlignment="Stretch"
-                                    Orientation="Horizontal">
-                                    <TextBox />
-                                    <ComboBox
-                                        x:Name="cbSearchTvShows"
-                                        Height="21"
-                                        Width="100"
-                                        Margin="3"
-                                        HorizontalAlignment="Right"
-                                        HorizontalContentAlignment="Right" />
+                                    HorizontalAlignment="Stretch">
                                     <Image
                                         x:Name="picSearchTvShows"
+                                        DockPanel.Dock="Right"
                                         Height="16"
                                         Width="16"
                                         HorizontalAlignment="Right"
@@ -3206,55 +4778,21 @@
                                         Source="{Binding
                                             Converter={StaticResource MyBitmapToImageSourceConverter},
                                             Source={x:Static myRes:Resources.picSearchMoviesImage}}" />
-                                </StackPanel>
-                                <Grid x:Name="scTV">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="1*" />
-                                        <RowDefinition Height="1*" />
-                                        <RowDefinition Height="1*" />
-                                    </Grid.RowDefinitions>
-                                    <DataGrid
-                                        x:Name="dgvTVShows"
-                                        Grid.Row="0"
-                                        HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Stretch"
-                                        CanUserReorderColumns="False"
-                                        CanUserResizeRows="False"
-                                        HorizontalScrollBarVisibility="Auto"
-                                        VerticalScrollBarVisibility="Auto" />
-                                    <GridSplitter
-                                        x:Name="gridSplitter_TvShows"
-                                        Grid.Row="0"
-                                        Height="5"
-                                        HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Bottom" />
-                                    <DataGrid
-                                        x:Name="dgvTVSeasons"
-                                        Grid.Row="1"
-                                        HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Stretch"
-                                        CanUserReorderColumns="False"
-                                        CanUserResizeRows="False"
-                                        HorizontalScrollBarVisibility="Auto"
-                                        VerticalScrollBarVisibility="Auto" />
-                                    <GridSplitter
-                                        x:Name="gridSplitter_Shows"
-                                        Grid.Row="1"
-                                        Height="5"
-                                        HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Bottom" />
+                                    <ComboBox
+                                        x:Name="cbSearchTvShows"
+                                        DockPanel.Dock="Right"
+                                        Height="21"
+                                        Width="100"
+                                        Margin="3"
+                                        HorizontalAlignment="Right"
+                                        HorizontalContentAlignment="Right" />
+                                    <xctk:WatermarkTextBox
+                                        x:Name="txtSearchShows"
+                                        Height="21"
+                                        Margin="3"
+                                        HorizontalAlignment="Stretch" />
 
-                                    <DataGrid
-                                        x:Name="dgvTVEpisodes"
-                                        Grid.Row="2"
-                                        HorizontalAlignment="Stretch"
-                                        VerticalAlignment="Stretch"
-                                        CanUserReorderColumns="False"
-                                        CanUserResizeRows="False"
-                                        HorizontalScrollBarVisibility="Auto"
-                                        VerticalScrollBarVisibility="Auto" />
-                                </Grid>
-
+                                </DockPanel>
                                 <Expander
                                     x:Name="pnlFilter_Shows"
                                     DockPanel.Dock="Bottom"
@@ -3671,6 +5209,53 @@
                                         </StackPanel>
                                     </StackPanel>
                                 </Expander>
+                                <Grid x:Name="scTV">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1*" />
+                                        <RowDefinition Height="1*" />
+                                        <RowDefinition Height="1*" />
+                                    </Grid.RowDefinitions>
+                                    <DataGrid
+                                        x:Name="dgvTVShows"
+                                        Grid.Row="0"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch"
+                                        CanUserReorderColumns="False"
+                                        CanUserResizeRows="False"
+                                        HorizontalScrollBarVisibility="Auto"
+                                        VerticalScrollBarVisibility="Auto" />
+                                    <GridSplitter
+                                        x:Name="gridSplitter_TvShows"
+                                        Grid.Row="0"
+                                        Height="5"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Bottom" />
+                                    <DataGrid
+                                        x:Name="dgvTVSeasons"
+                                        Grid.Row="1"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch"
+                                        CanUserReorderColumns="False"
+                                        CanUserResizeRows="False"
+                                        HorizontalScrollBarVisibility="Auto"
+                                        VerticalScrollBarVisibility="Auto" />
+                                    <GridSplitter
+                                        x:Name="gridSplitter_Shows"
+                                        Grid.Row="1"
+                                        Height="5"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Bottom" />
+
+                                    <DataGrid
+                                        x:Name="dgvTVEpisodes"
+                                        Grid.Row="2"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch"
+                                        CanUserReorderColumns="False"
+                                        CanUserResizeRows="False"
+                                        HorizontalScrollBarVisibility="Auto"
+                                        VerticalScrollBarVisibility="Auto" />
+                                </Grid>
                             </DockPanel>
                         </Grid>
                     </TabItem>
