@@ -2674,7 +2674,7 @@ Public Class frmMain
             DoTitleCheck()
             SetControlsEnabled(True)
         End If
-        Cursor = Cursors.Default
+        Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub bwReload_MovieSets_DoWork(ByVal sender As Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles bwReload_MovieSets.DoWork

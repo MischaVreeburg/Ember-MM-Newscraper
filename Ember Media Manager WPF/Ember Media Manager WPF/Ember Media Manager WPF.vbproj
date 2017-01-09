@@ -96,6 +96,14 @@
       <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EmberAPI.dll">
+      <HintPath>..\..\EmberMM - Debug - x64\EmberAPI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ember Media Manager.exe">
+      <HintPath>..\..\EmberMM - Debug - x64\Ember Media Manager.exe</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <HintPath>..\packages\Extended.Wpf.Toolkit.3.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
       <Private>True</Private>
@@ -132,12 +140,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="EmberMediaManager.Core.Functions.vb" />
-    <Compile Include="frmMain.Designer.vb">
+    <None Include="frmMain.Designer.vb">
       <DependentUpon>frmMain.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmMain.vb">
+    </None>
+    <None Include="frmMain.vb">
       <SubType>Form</SubType>
-    </Compile>
+    </None>
     <Compile Include="frmMainWindow.xaml.vb">
       <DependentUpon>frmMainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -184,10 +192,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="frmMain.resx">
+    <None Include="frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
+    </None>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
@@ -202,16 +210,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\EmberAPI\EmberAPI.vbproj">
-      <Project>{208AA35E-C6AE-4D2D-A9DD-B6EFD19A4279}</Project>
-      <Name>EmberAPI</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\EmberMediaManager\EmberMediaManager.vbproj">
-      <Project>{9b57d3ab-af12-4012-b945-284c2448dc81}</Project>
-      <Name>EmberMediaManager</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\actor_silhouette.jpg" />
