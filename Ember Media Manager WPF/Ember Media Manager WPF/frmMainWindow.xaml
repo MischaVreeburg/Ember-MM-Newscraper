@@ -2890,7 +2890,7 @@
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem
-                    x:Name="mnuError"
+                    x:Name="mnuMainError"
                     DockPanel.Dock="Right"
                     HorizontalAlignment="Right"
                     ToolTip="An Error Has Occurred">
@@ -3880,7 +3880,7 @@
                                     </StackPanel>
                                 </Expander>
                                 <DataGrid
-                                    x:Name="dvgMovies"
+                                    x:Name="dgvMovies"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
                                     CanUserReorderColumns="False"
