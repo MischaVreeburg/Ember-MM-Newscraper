@@ -17,6 +17,7 @@ Public Class MyBitmapToImageSourceConverter
             Dim bitmapImage = New BitmapImage()
             bitmapImage.BeginInit()
             bitmapImage.StreamSource = memoryStream
+            bitmapImage.CacheOption = BitmapCacheOption.OnLoad
             bitmapImage.EndInit()
 
             Return bitmapImage

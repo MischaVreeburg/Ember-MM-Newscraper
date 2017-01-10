@@ -158,7 +158,19 @@ Public Module DataGridExtension
     Public Function Image(ByRef im As Controls.Image) As ImageSource
         Return im.Source
     End Function
+
+    <Extension()>
+    Public Function RowCount(ByRef dg As DataGrid) As Integer
+        Return dg.Items.Count
+    End Function
+
 End Module
+
+
+
+
+
+
 Public Module ControlExtension
     <Extension()>
     Public Function GetVisualChild(Of T As Visual)(ByVal parent As Visual) As T
@@ -317,4 +329,10 @@ Public Module ControlExtension
         End If
     End Sub
 
+    <Extension()>
+    Public Function Visible(ByVal control As FrameworkElement) As Boolean
+
+        Return control.Visibility = Visibility.Visible
+
+    End Function
 End Module

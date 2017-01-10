@@ -130,6 +130,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="frmMainWindowModel.vb" />
+    <Compile Include="frmMainWindowViewModel.vb" />
     <Compile Include="MyBitmapToImageSourceConverter.vb" />
     <Page Include="frmMainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
